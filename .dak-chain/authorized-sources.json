@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "security_level": "strict",
+  "description": "Whitelist de repos autorizados para auto-crear agentes en este sistema",
+  "allowed_repos": [
+    "Patodak/manager-battle-pro",
+    "Patodak/dak-chain-ia"
+  ],
+  "allowed_users": [
+    "Patodak",
+    "ALIENVIBEZ"
+  ],
+  "required_signature": false,
+  "signature_algorithm": "sha256",
+  "permissions": {
+    "read": {
+      "allowed": [
+        "blockchain-viviente",
+        "skills",
+        "docs",
+        "knowledge",
+        "code"
+      ],
+      "forbidden": [
+        "secrets",
+        "env",
+        "credentials"
+      ]
+    },
+    "write": {
+      "allowed": [
+        "issues",
+        "agent-registry"
+      ],
+      "forbidden": [
+        "source-code",
+        "commits",
+        "pull-requests",
+        "branches"
+      ]
+    },
+    "execute": {
+      "allowed": [
+        "github-mcp",
+        "github-cli",
+        "task-explore",
+        "context7-mcp"
+      ],
+      "forbidden": [
+        "bash",
+        "system-commands",
+        "file-operations"
+      ]
+    }
+  },
+  "rate_limits": {
+    "issues_per_hour": 10,
+    "api_calls_per_minute": 30,
+    "agent_creations_per_day": 5
+  },
+  "monitoring": {
+    "log_all_actions": true,
+    "alert_on_unauthorized": true,
+    "notify_email": "security@dak-chain.ai"
+  },
+  "created_at": "2025-10-26T05:30:00Z",
+  "updated_at": "2025-10-26T05:30:00Z",
+  "created_by": "DAK-CHAIN-Security-System"
+}

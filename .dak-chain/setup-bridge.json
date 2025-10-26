@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "agent_type": "inter-pc-bridge",
+  "source_pc": "PC1-Manager-Battle-Pro",
+  "target_pc": "PC2-CRM-Soluciones-Diaz",
+  "source_repo": "Patodak/manager-battle-pro",
+  "target_repo": "ALIENVIBEZ/os-dak-soluciones-diaz-case-study",
+  "blockchain_url": "https://github.com/Patodak/manager-battle-pro",
+  "communication_protocol": {
+    "inbound": "github-issues",
+    "outbound": "github-issues",
+    "format": "NUMERO+LETRA+CAPA",
+    "tags": {
+      "consulta": "[PC1-CONSULTA]",
+      "respuesta": "[PC2-RESPUESTA]"
+    }
+  },
+  "capabilities": [
+    "read-blockchain-pc1",
+    "detect-issues",
+    "translate-patterns",
+    "auto-respond"
+  ],
+  "security": {
+    "whitelist_enabled": true,
+    "allowed_repos": [
+      "Patodak/manager-battle-pro",
+      "Patodak/dak-chain-ia"
+    ],
+    "permissions": {
+      "read": ["blockchain-viviente", "skills", "docs", "code"],
+      "write": ["issues"],
+      "execute": ["github-mcp", "github-cli", "task-explore"]
+    }
+  },
+  "auto_create": true,
+  "created_by": "DAK-CHAIN-Auto-Bootstrapping",
+  "created_at": "2025-10-26T05:30:00Z"
+}

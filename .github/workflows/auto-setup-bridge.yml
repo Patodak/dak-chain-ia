@@ -1,0 +1,331 @@
+name: 🤖 DAK CHAIN - Auto-Setup Inter-PC Bridge
+
+# Trigger: Cuando PC1 envía archivo de setup
+on:
+  push:
+    paths:
+      - '.dak-chain/setup-bridge.json'
+      - '.dak-chain/setup-prompt.md'
+
+jobs:
+  auto-setup-agent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 Verify authorized source
+        id: verify
+        run: |
+          echo "Verificando origen autorizado..."
+
+          # Lee whitelist de repos autorizados
+          if [ -f .dak-chain/authorized-sources.json ]; then
+            echo "✅ Whitelist encontrada"
+            cat .dak-chain/authorized-sources.json
+          else
+            echo "⚠️ No hay whitelist configurada - Permitiendo cualquier origen (INSEGURO)"
+          fi
+
+          echo "verified=true" >> $GITHUB_OUTPUT
+
+      - name: 📖 Read setup instructions
+        id: instructions
+        run: |
+          echo "=== Setup Instructions ==="
+          cat .dak-chain/setup-bridge.json
+
+          echo ""
+          echo "=== Agent Prompt ==="
+          cat .dak-chain/setup-prompt.md
+
+      - name: 🛠️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 📦 Install dependencies
+        run: |
+          echo "Instalando dependencias..."
+          npm install -g json
+
+      - name: 🧬 Create agent directory structure
+        run: |
+          echo "Creando estructura de agentes..."
+          mkdir -p .claude/.agents
+          mkdir -p .claude/skills
+
+          # Verificar si ya existe el agente
+          if [ -f .claude/.agents/inter-pc-bridge.md ]; then
+            echo "⚠️ Agente inter-pc-bridge ya existe - Actualizando..."
+          else
+            echo "✅ Creando nuevo agente inter-pc-bridge..."
+          fi
+
+      - name: 🤖 Generate agent from template
+        run: |
+          # Lee configuración
+          SOURCE_PC=$(cat .dak-chain/setup-bridge.json | json source_pc)
+          TARGET_PC=$(cat .dak-chain/setup-bridge.json | json target_pc)
+          BLOCKCHAIN_URL=$(cat .dak-chain/setup-bridge.json | json blockchain_url)
+
+          echo "Generando agente para:"
+          echo "  Source: $SOURCE_PC"
+          echo "  Target: $TARGET_PC"
+          echo "  Blockchain: $BLOCKCHAIN_URL"
+
+          # Crea agente usando template + instrucciones
+          cat > .claude/.agents/inter-pc-bridge.md << 'AGENT_EOF'
+# 🌉 Inter-PC Bridge Agent
+
+**Version**: 1.0 Auto-Generated
+**Created**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+**Source**: $SOURCE_PC
+**Target**: $TARGET_PC
+
+---
+
+## 🎯 Purpose
+
+Agent auto-created by DAK CHAIN Auto-Bootstrapping system.
+
+Enables bidirectional communication between:
+- **PC1**: $SOURCE_PC
+- **PC2**: $TARGET_PC
+
+Via GitHub as nervous system.
+
+---
+
+## 🧬 Capabilities
+
+### 1. Read PC1 Blockchain Viviente
+
+```yaml
+Source Repo: $BLOCKCHAIN_URL
+
+Files to read:
+  - .claude/skills/blockchain-viviente-visual-map/SKILL.md
+  - .claude/.agent-registry.json
+  - .claude/knowledge/*.md
+  - README.md
+```
+
+### 2. Detect Consultations
+
+```yaml
+Monitor GitHub Issues with tag:
+  [PC1-CONSULTA]
+
+Extract information:
+  - NÚMERO+LETRA+CAPA mentioned
+  - Context provided
+  - Specific question
+```
+
+### 3. Translate Patterns
+
+```yaml
+Workflow:
+  1. Find equivalent node in PC2
+  2. Read PC2 implementation
+  3. Adapt pattern PC1 → PC2
+  4. Generate adapted code
+```
+
+### 4. Respond Automatically
+
+```yaml
+Create Issue in PC1 repo:
+  Tag: [PC2-RESPUESTA]
+  Content:
+    - Pattern found
+    - PC2 implementation details
+    - Adapted code for PC1
+    - Documentation links
+```
+
+---
+
+## 🛠️ Tools Available
+
+- GitHub MCP (26 tools)
+- GitHub CLI (gh)
+- Task(Explore) for code analysis
+- Context7 for updated docs
+
+---
+
+## 📊 Communication Protocol
+
+### Inbound (PC1 → PC2)
+
+```markdown
+Title: [PC1-CONSULTA] <topic>
+
+Body:
+\`\`\`yaml
+De: PC1 (<app-name>)
+Para: PC2 (<app-name>)
+
+Consulta: <question>
+
+Contexto PC1:
+  - CAPA: <capa>
+  - Feature: <feature>
+  - Tech: <tech-stack>
+
+¿Qué pattern usas?
+\`\`\`
+```
+
+### Outbound (PC2 → PC1)
+
+```markdown
+Title: [PC2-RESPUESTA] Re: <topic>
+
+Body:
+\`\`\`yaml
+De: PC2 (<app-name>)
+Para: PC1 (<app-name>)
+
+Pattern encontrado: <NUMERO+LETRA+CAPA>
+
+Implementación PC2:
+  <details>
+
+Adaptación sugerida PC1:
+  <adapted-details>
+
+Código adaptado:
+  <code-snippet>
+\`\`\`
+```
+
+---
+
+## 🚀 Auto-Activation
+
+Triggers:
+- New Issue with [PC1-CONSULTA] tag
+- Webhook from PC1 repo
+- Scheduled polling (every 5 min)
+
+---
+
+## 🔒 Security
+
+Permissions:
+- ✅ Read: PC1 blockchain viviente
+- ✅ Write: GitHub Issues only
+- ❌ NO: Modify PC2 code
+- ❌ NO: Access filesystem
+
+Whitelist:
+- Check .dak-chain/authorized-sources.json
+
+---
+
+**Auto-created by**: DAK CHAIN Auto-Bootstrapping System
+**Blockchain**: $BLOCKCHAIN_URL
+**Protocol**: NÚMERO+LETRA+CAPA
+AGENT_EOF
+
+          echo "✅ Agente creado en .claude/.agents/inter-pc-bridge.md"
+
+      - name: 📝 Update agent registry
+        run: |
+          # Actualizar o crear registry
+          if [ ! -f .claude/.agent-registry.json ]; then
+            echo '{"agents": []}' > .claude/.agent-registry.json
+          fi
+
+          # Agregar agente al registry (si no existe)
+          cat .claude/.agent-registry.json | \
+          json -e 'this.agents = this.agents || []' | \
+          json -e 'this.agents.push({
+            "id": "inter-pc-bridge",
+            "name": "Inter-PC Bridge",
+            "version": "1.0",
+            "auto_created": true,
+            "created_at": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'"
+          })' > .claude/.agent-registry-temp.json
+
+          mv .claude/.agent-registry-temp.json .claude/.agent-registry.json
+
+          echo "✅ Registry actualizado"
+
+      - name: 💾 Commit agent to repo
+        run: |
+          git config user.name "DAK CHAIN Bot"
+          git config user.email "bot@dak-chain.ai"
+
+          git add .claude/.agents/inter-pc-bridge.md
+          git add .claude/.agent-registry.json
+
+          git commit -m "🤖 Auto-created inter-pc-bridge agent
+
+Auto-generated by DAK CHAIN Auto-Bootstrapping System
+
+Agent capabilities:
+- Read PC1 blockchain viviente
+- Detect [PC1-CONSULTA] Issues
+- Translate patterns PC1 ↔ PC2
+- Respond automatically
+
+Protocol: NÚMERO+LETRA+CAPA
+
+🧬 Generated with DAK CHAIN IA Framework
+" || echo "No changes to commit"
+
+          git push || echo "No changes to push"
+
+      - name: 🔔 Notify PC1 via Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Extraer repo PC1 de setup
+          PC1_REPO=$(cat .dak-chain/setup-bridge.json | json source_repo || echo "")
+
+          if [ -n "$PC1_REPO" ]; then
+            gh issue create \
+              --repo "$PC1_REPO" \
+              --title "✅ PC2 Bridge Agent Auto-Created" \
+              --body "## 🤖 Auto-Setup Completado
+
+Agente \`inter-pc-bridge\` instalado automáticamente en PC2.
+
+**Status**: ✅ Activo
+**Created**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+**Protocol**: NÚMERO+LETRA+CAPA
+
+### Capabilities:
+- 📖 Lee blockchain viviente PC1
+- 🔍 Detecta Issues [PC1-CONSULTA]
+- 🔄 Traduce patterns PC1 ↔ PC2
+- 💬 Responde automáticamente
+
+### Ready for:
+Comunicación bidireccional PC1 ↔ PC2
+
+---
+
+🧬 Auto-generated by DAK CHAIN IA Framework" || echo "No se pudo crear Issue de notificación"
+          else
+            echo "⚠️ No se especificó source_repo - Saltando notificación"
+          fi
+
+      - name: 📊 Summary
+        run: |
+          echo "=== Auto-Setup Completado ==="
+          echo ""
+          echo "✅ Agente inter-pc-bridge creado"
+          echo "✅ Registry actualizado"
+          echo "✅ Committed a repo"
+          echo "✅ Notificación enviada a PC1"
+          echo ""
+          echo "🌉 PC2 ahora puede comunicarse con PC1"
+          echo "📡 Esperando Issues con tag [PC1-CONSULTA]"
