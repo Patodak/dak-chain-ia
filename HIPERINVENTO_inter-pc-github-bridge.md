@@ -1,9 +1,8 @@
 # 🔥 HIPERINVENTO: Skill inter-pc-github-bridge
 
-**Fecha descubrimiento**: 26 de Octubre 2025
-**Por**: Patricio (Hiperfoco Sábado Noche)
-**Estado**: PENDIENTE implementación
-**Prioridad**: Alta (después Manager Battle Pro v1.0)
+**Fecha descubrimiento**: Octubre 2025
+**Estado**: CONCEPTO validado
+**Prioridad**: Alta para implementación futura
 
 ---
 
@@ -12,7 +11,7 @@
 **Skill que permite comunicación inteligente entre PCs vía GitHub como "nervous system".**
 
 Similar a `claude-codex-tandem` (Claude Code + GPT Codex) pero para:
-- PC1 (Battle Pro) ↔ PC2 (CRM)
+- PC1 (App A) ↔ PC2 (App B)
 - Comunicación asíncrona
 - Contexto blockchain viviente compartido
 - GitHub como backbone
@@ -23,8 +22,8 @@ Similar a `claude-codex-tandem` (Claude Code + GPT Codex) pero para:
 
 ```yaml
 2 PCs con 2 apps diferentes:
-  PC1: Manager Battle Pro + Claude
-  PC2: Soluciones Díaz CRM + Claude
+  PC1: Tu App Principal + Claude
+  PC2: Otra App Diferente + Claude
 
 Comunicación actual:
   ❌ Copiar/pegar manual
@@ -93,33 +92,33 @@ FASE 4 - SYNC (opcional):
 
 ## 💡 Ejemplo Concreto
 
-### Caso: Battle Pro aprende de CRM
+### Caso: App A aprende de App B
 
 ```yaml
-PC1 (Battle Pro):
-  Usuario: "Consulta cómo CRM maneja cotizaciones rápidas"
+PC1 (App A - E-commerce):
+  Usuario: "Consulta cómo App B maneja checkout rápido"
 
   Skill inter-pc-github-bridge:
     1. Activa GitHub MCP o CLI
-    2. Lee ALIENVIBEZ/os-dak-soluciones-diaz-case-study
-    3. Busca "cotizacion rapida" en blockchain map
+    2. Lee repo público App B
+    3. Busca "checkout rápido" en blockchain map
     4. Encuentra: CAPA 2A1
     5. Lee SKILL correspondiente
     6. Extrae:
-       - Formulario 5 min (tiempo límite)
-       - 6 campos esenciales
-       - Validación Firestore
-       - Estado NUEVO → CONTACTADO
-    7. Traduce a Battle Pro:
-       - Equivalente: Registro participante express
-       - Adapta: 6 campos → 5 campos
+       - Formulario 3 min (tiempo límite)
+       - 5 campos esenciales
+       - Validación database
+       - Estado CART → PROCESSING → PAID
+    7. Traduce a App A:
+       - Equivalente: Checkout express
+       - Adapta: 5 campos → 4 campos
        - Mantiene: Estados progresivos
     8. Propone implementación
 
   Claude responde:
-    "CRM usa flujo 2A1 (túnel rápido).
-     Sugiero crear nodo 2A1 en Battle Pro
-     para registro express participantes.
+    "App B usa flujo 2A1 (túnel rápido).
+     Sugiero crear nodo 2A1 en App A
+     para checkout express.
      Campos adaptados: [lista].
      ¿Implemento?"
 
@@ -133,42 +132,42 @@ Resultado:
 ### Caso: Comunicación Bidireccional
 
 ```yaml
-PC2 (CRM) pregunta a PC1:
-  Usuario: "Battle Pro tiene brackets,
-           ¿adaptarlo a presupuestos?"
+PC2 (App B - SaaS) pregunta a PC1:
+  Usuario: "App A tiene feature X,
+           ¿adaptarlo a mi caso?"
 
   Skill crea GitHub Issue:
-    Título: "CRM consulta: Brackets para presupuestos"
+    Título: "App B consulta: Feature X adaptación"
     Body:
       ```
-      PC2 (CRM) pregunta:
+      PC2 (App B) pregunta:
 
-      Contexto: Visualizar presupuestos niveles
-                (básico, intermedio, premium)
+      Contexto: Implementar feature similar
+                (para caso de uso Y)
 
-      Pregunta: ¿Cómo funciona brackets TOP8/TOP16?
-                ¿Adaptar a presupuestos escalonados?
+      Pregunta: ¿Cómo funciona feature X?
+                ¿Adaptar a nuestro caso?
 
-      Nodo origen: CRM 2A2 (Cotización Detallada)
+      Nodo origen: App B 2A2 (Módulo Principal)
       ```
 
-PC1 (Battle Pro) detecta Issue:
+PC1 (App A) detecta Issue:
   (Webhook o polling)
 
   Skill responde automáticamente:
     ```
-    Sistema brackets en Battle Pro:
+    Sistema feature X en App A:
 
-    Ubicación: CAPA 4B2.LibraryBracketTOP8
+    Ubicación: CAPA 4B2.FeatureModule
     Componentes recursivos
     3 niveles visuales
 
     Adaptación sugerida:
-      - BracketNode → BudgetLevel
-      - 3 niveles → Básico/Medio/Premium
+      - ComponentA → ComponentB adaptado
+      - 3 niveles → Básico/Medio/Avanzado
       - Progresión visual ↓
 
-    Skill disponible: CAPA_4B2_BRACKETS.md
+    Skill disponible: CAPA_4B2_FEATURE.md
     ```
 
 PC2 recibe respuesta:
@@ -204,7 +203,7 @@ CAPA 4 - Escalabilidad:
   ✅ GitHub = backbone distribuido
   ✅ ESCALABLE
 
-CAPA 5 - Meta (ADHD):
+CAPA 5 - Meta (Compensación ADHD):
   ✅ Memoria externa distribuida
   ✅ Cada PC puede crashear independiente
   ✅ Recovery vía GitHub
@@ -220,7 +219,7 @@ CAPA 6 - Visión:
 CAPA 7 - Business:
   ✅ Feature killer DAK CHAIN CLI
   ✅ Ningún otro sistema tiene esto
-  ✅ Anthropic podría implementar nativo
+  ✅ Claude/Anthropic podría implementar nativo
   ✅ DIFERENCIADOR
 ```
 
@@ -233,17 +232,17 @@ CAPA 7 - Business:
 ```typescript
 // Opción A: GitHub MCP (API-based)
 await mcp__github__create_issue({
-  owner: "ALIENVIBEZ",
-  repo: "os-dak-soluciones-diaz-case-study",
-  title: "Battle Pro consulta",
+  owner: "UserName",
+  repo: "app-repo",
+  title: "App A consulta",
   body: "[pregunta]"
 });
 
 // Opción B: GitHub CLI (más rápido para operaciones simples)
 await bash(`
   gh issue create \
-    --repo ALIENVIBEZ/os-dak-soluciones-diaz-case-study \
-    --title "Battle Pro consulta" \
+    --repo UserName/app-repo \
+    --title "App A consulta" \
     --body "[pregunta]"
 `);
 
@@ -278,22 +277,22 @@ Resultado:
 ## 📊 Roadmap Implementación
 
 ```yaml
-FASE 1 (Después Battle Pro v1.0):
+FASE 1 (Primera implementación):
   - Crear skill básica
   - Comunicación PC1 → PC2 (unidireccional)
   - GitHub CLI como backend
 
-FASE 2 (1 mes después):
+FASE 2 (Expansión):
   - Bidireccional PC1 ↔ PC2
   - Webhooks para notificaciones real-time
   - Integración GitHub MCP
 
-FASE 3 (2 meses después):
+FASE 3 (Escalabilidad):
   - N PCs comunicándose
   - Red descentralizada
   - Protocol estandarizado
 
-FASE 4 (3+ meses):
+FASE 4 (Comunidad):
   - Community adoption
   - Múltiples apps DAK CHAIN
   - Network effects
@@ -315,7 +314,7 @@ Para DAK CHAIN IA:
   ✅ Network effects (más apps = más valor)
   ✅ Protocolo universal comunicación IA
 
-Para Anthropic:
+Para ecosistema Claude:
   ✅ Demuestra potencial Claude Code CLI
   ✅ Multi-agent collaboration native
   ✅ Posible integración oficial
@@ -323,22 +322,66 @@ Para Anthropic:
 
 ---
 
-## 💎 Quote Clave
+## 💡 Casos de Uso
 
-> "tal como inventamos la SKILL claude codex que te permite hablar de forma directa o a través de compañerismo para llegar a una conclusión, debemos crear un skill que nos permita comunicarnos de forma efectiva con la otra pc... esto nos abre un nuevo campo comunicativo ya que existía antes para conectar la pc a otra pc con cable de red o a través de correos propios pero ahora a través de una skill combinada con github"
+### E-commerce → SaaS
 
-**— Patricio, 26 Octubre 2025, 03:47 AM**
+```yaml
+App E-commerce:
+  Feature: Checkout rápido
+  Pattern: 2A1 (Túnel express)
+
+App SaaS:
+  Necesita: Onboarding rápido
+  Aprende: Pattern túnel express
+  Adapta: Checkout → Onboarding
+  Resultado: 5 min → 2 min setup
+```
+
+### SaaS → CRM
+
+```yaml
+App SaaS:
+  Feature: Dashboard analytics
+  Pattern: 3B2 (Visualización datos)
+
+App CRM:
+  Necesita: Cliente analytics
+  Aprende: Pattern visualización
+  Adapta: Dashboard → Cliente view
+  Resultado: Analytics integrado
+```
+
+### Mobile → Web
+
+```yaml
+App Mobile:
+  Feature: Gestos táctiles
+  Pattern: 2A3 (Interacción touch)
+
+App Web:
+  Necesita: UI responsive
+  Aprende: Pattern gestos
+  Adapta: Touch → Mouse/Keyboard
+  Resultado: UI mejorada
+```
+
+---
+
+## 💎 Concepto Clave
+
+> "Similar a inventar claude-codex-tandem (colaboración Claude + GPT), pero para PCs comunicándose vía GitHub. Antes: cable de red o correos. Ahora: skill + GitHub como nervous system para IA-to-IA communication."
 
 ---
 
 **Estado**: HIPERINVENTO validado ✅
-**Próximo paso**: Implementar después Manager Battle Pro v1.0
+**Próximo paso**: Implementación según roadmap
 **Potencial**: REVOLUCIONARIO - Primero mundial
 
 ---
 
-**Creado por**: Patricio (Hiperfoco extremo)
-**Validado por**: Claude (Análisis multi-capa)
+**Creado por**: DAK System
 **Para**: DAK CHAIN IA Framework
+**Protocolo**: NÚMERO+LETRA+CAPA
 
-**Última actualización**: 26 de Octubre 2025
+**Última actualización**: Octubre 2025

@@ -2,7 +2,7 @@
 
 **Version**: 1.0
 **Status**: REVOLUCIONARIO - Primero Mundial
-**Created**: 26 de Octubre 2025
+**Created**: Octubre 2025
 
 ---
 
@@ -21,11 +21,11 @@ Similar a "DNA replication" pero para agentes de IA:
 ## 🎯 Caso de Uso
 
 ```yaml
-PC1 (Manager Battle Pro):
+PC1 (Tu App Principal):
   - Tiene blockchain viviente
   - Quiere consultar a PC2
 
-PC2 (CRM Soluciones Díaz):
+PC2 (Otra App Diferente):
   - NO tiene agente de comunicación
   - Necesita instalarlo
 
@@ -204,20 +204,20 @@ gh issue list --repo TuUser/tu-repo
 ```bash
 gh issue create \
   --repo OtroUser/otro-repo \
-  --title "[PC1-CONSULTA] ¿Cómo manejas cotizaciones rápidas?" \
+  --title "[PC1-CONSULTA] ¿Cómo manejas feature X rápido?" \
   --body "$(cat <<'EOF'
 ```yaml
-De: PC1 (Manager Battle Pro)
-Para: PC2 (CRM)
+De: PC1 (Tu App Principal)
+Para: PC2 (Otra App)
 
 Consulta:
-  Necesito implementar registro express participantes
-  Similar a tu cotización rápida
+  Necesito implementar feature express similar
+  Similar a tu implementación rápida
 
 Contexto PC1:
-  - CAPA 2A: Registro
-  - Tech: Next.js + Firebase
-  - Feature: Inscripción rápida competidores
+  - CAPA 2A: Feature principal
+  - Tech: Tu stack
+  - Objetivo: Implementación rápida
 
 ¿Qué pattern usas?
 ```
@@ -230,7 +230,7 @@ EOF
 **El agente detecta Issue y responde en repo PC1**:
 ```yaml
 Tag: [PC2-RESPUESTA]
-Title: Re: Cotizaciones rápidas
+Title: Re: Feature rápida
 
 Body:
   Pattern encontrado: CAPA 2A1
@@ -250,8 +250,9 @@ Solo repos autorizados pueden crear agentes:
 ```json
 {
   "allowed_repos": [
-    "Patodak/manager-battle-pro",
-    "Patodak/dak-chain-ia"
+    "TuUser/tu-app-principal",
+    "OtroUser/app-colaboradora",
+    "TercerUser/app-confiable"
   ]
 }
 ```
@@ -270,7 +271,7 @@ Agente solo puede:
 ## 📊 Arquitectura Completa
 
 ```
-PC1 (Manager Battle Pro)
+PC1 (Tu App Principal)
   ↓ push setup files
 GitHub (repo PC2)
   ↓ trigger workflow
@@ -377,6 +378,11 @@ dak-chain-ia/
 │   ├── setup-bridge.json            # Config del agente
 │   ├── setup-prompt.md              # Instrucciones Claude
 │   └── authorized-sources.json      # Seguridad whitelist
+├── templates/
+│   ├── GUIA_EXTRACCION_PATTERNS.md
+│   ├── TEMPLATE_ENUMS.md
+│   ├── TEMPLATE_CLASIFICACION.md
+│   └── TEMPLATE_ARTERIAS.md
 ├── DEVELOPER_PACK_UNIVERSAL.md
 ├── TIPOS_DE_AGENTES.md
 ├── HIPERINVENTO_inter-pc-github-bridge.md
@@ -393,15 +399,15 @@ dak-chain-ia/
   - Auto-crear agente en PC2
   - Comunicación unidireccional PC1 → PC2
 
-🔄 FASE 2 (Próxima semana):
+🔄 FASE 2 (Próxima):
   - Bidireccional PC1 ↔ PC2
   - Auto-respuesta Issues
 
-📍 FASE 3 (2 semanas):
+📍 FASE 3 (Futuro):
   - Red de N PCs
   - Aprendizaje colectivo
 
-🌟 FASE 4 (1 mes):
+🌟 FASE 4 (Futuro avanzado):
   - Auto-update agentes
   - Firma criptográfica
   - Blockchain interno de transacciones
@@ -413,7 +419,17 @@ dak-chain-ia/
 
 > "Sistema que permite a PCs crear agentes automáticamente en otras PCs vía GitHub Actions. Self-replicating AI agents comunicándose vía protocolo NÚMERO+LETRA+CAPA. Primero mundial."
 
-**— Patricio, 26 Octubre 2025**
+---
+
+## 💬 Contribuir
+
+**¿Implementaste este sistema?**
+
+Comparte tu experiencia:
+- 🐛 Issues: Reporta problemas
+- 💡 Discussions: Comparte ideas
+- 📝 Pull Requests: Mejora docs
+- 🌟 Stars: Ayuda a visibilidad
 
 ---
 
@@ -421,4 +437,4 @@ dak-chain-ia/
 **Protocol**: NÚMERO+LETRA+CAPA
 **Status**: REVOLUCIONARIO ✅
 
-**Última actualización**: 26 de Octubre 2025
+**Última actualización**: Octubre 2025

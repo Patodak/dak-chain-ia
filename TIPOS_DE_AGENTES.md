@@ -1,7 +1,7 @@
 # 🤖 Tipos de Agentes - Blockchain Viviente vs Externos
 
 **Versión**: 1.0
-**Creado**: 26 de Octubre 2025
+**Creado**: Octubre 2025
 **Crítico**: Entender diferencia para delegar correctamente
 
 ---
@@ -13,8 +13,8 @@
 1. **Agentes Blockchain Viviente** (internos al sistema)
 2. **Agentes Externos / Trabajadores** (helpers que ahorran contexto)
 
-**Quote clave**:
-> "tenemos agentes de la blockchain viviente y agentes externos que nos ayudan con la app y nuestro código... recuerda que tienes trabajadores siempre."
+**Concepto clave**:
+> "Tenemos agentes de la blockchain viviente y agentes externos que nos ayudan con la app y nuestro código. Los trabajadores externos ahorran contexto masivamente."
 
 ---
 
@@ -42,7 +42,8 @@ Ubicación:
 Notación:
   - Tienen NÚMERO + LETRA + URL
   - Ejemplo: dashboard-master (CAPA 3A)
-  - Ejemplo: projector-live-display (4B2)
+  - Ejemplo: auth-manager (CAPA 2A)
+  - Ejemplo: api-handler (CAPA 3B)
 
 Validación:
   - Sujetos a Guardian (excepto CAPA 0)
@@ -72,7 +73,7 @@ Propósito:
 Ubicación:
   - MCP tools (Firebase, Context7, Playwright)
   - Task tool con subagent_type
-  - Skills como claude-codex-tandem
+  - Skills especializadas
   - NO en .claude/.agents/
 
 Notación:
@@ -100,11 +101,11 @@ Herramientas:
   - 40+ tools disponibles
 
 Uso:
-  Obtener estado REAL de Firestore
-  Ejemplo: "¿Qué eventos tiene usuario X?"
+  Obtener estado REAL de base de datos
+  Ejemplo: "¿Qué usuarios tienen rol X?"
 
 Delegación:
-  → Claude: "Necesito eventos de usuario123"
+  → Claude: "Necesito usuarios con rol admin"
   → Firebase MCP: Query Firestore
   → Firebase MCP: Retorna datos reales
   → Claude: Analiza datos SIN gastar contexto
@@ -124,7 +125,7 @@ Uso:
   Ejemplo: "Docs de Next.js 15 App Router"
 
 Delegación:
-  → Claude: "Necesito docs Next.js routing"
+  → Claude: "Necesito docs React routing"
   → Context7: Fetch docs actualizadas
   → Context7: Retorna docs relevantes
   → Claude: Usa docs SIN cargarlas previamente
@@ -143,10 +144,10 @@ Herramientas:
 
 Uso:
   Ver estado REAL de UI
-  Ejemplo: "Screenshot dashboard actual"
+  Ejemplo: "Screenshot de página actual"
 
 Delegación:
-  → Claude: "Muéstrame dashboard"
+  → Claude: "Muéstrame la página"
   → Playwright: Abre browser
   → Playwright: Captura screenshot
   → Claude: Analiza visual SIN suposiciones
@@ -195,14 +196,14 @@ Ahorro: 10000-20000 tokens (archivos grandes)
 ```yaml
 SIN delegación:
   Claude lee 10 archivos: 50k tokens
-  Claude query Firestore: 5k tokens
+  Claude query database: 5k tokens
   Claude carga docs: 10k tokens
 
   Total: 65k tokens consumidos
   Resultado: Contexto saturado, menos espacio para razonar
 
 CON delegación:
-  Firebase MCP query: 0 tokens Claude
+  MCP query database: 0 tokens Claude
   Task(Explore) analiza archivos: 0 tokens Claude
   Context7 carga docs: 0 tokens Claude
 
@@ -233,32 +234,32 @@ Resultado: 10x más eficiente
 
 ## 🎯 Reglas de Delegación
 
-### 1. Información Real → Firebase MCP
+### 1. Información Real → Database MCP
 
 ```yaml
-Pregunta: "¿Cuántos eventos tiene usuario X?"
-Delegar a: mcp__firebase__firestore_query_collection
+Pregunta: "¿Cuántos registros tiene tabla X?"
+Delegar a: mcp__[database]__query
 
 NO hacer:
   ❌ Claude intenta recordar/suponer
   ❌ Buscar en código fuente
 
 SÍ hacer:
-  ✅ Firebase MCP query directo
+  ✅ Database MCP query directo
   ✅ Datos REALES en 2 segundos
 ```
 
-### 2. Archivos Grandes → Task(Explore) o Codex
+### 2. Archivos Grandes → Task(Explore)
 
 ```yaml
 Archivo: page.tsx (32k tokens)
-Delegar a: claude-codex-tandem
+Delegar a: Task(Explore)
 
 NO hacer:
   ❌ Claude lee archivo completo (satura contexto)
 
 SÍ hacer:
-  ✅ Codex analiza visualmente
+  ✅ Task analiza archivo
   ✅ Claude recibe solo insights
   ✅ 25k tokens ahorrados
 ```
@@ -266,7 +267,7 @@ SÍ hacer:
 ### 3. Docs Framework → Context7 MCP
 
 ```yaml
-Pregunta: "¿Cómo funciona App Router en Next.js 15?"
+Pregunta: "¿Cómo funciona routing en framework X?"
 Delegar a: mcp__context7__get-library-docs
 
 NO hacer:
@@ -280,7 +281,7 @@ SÍ hacer:
 ### 4. Debug Visual → Playwright MCP
 
 ```yaml
-Problema: "Dashboard muestra incorrectamente"
+Problema: "Página muestra incorrectamente"
 Delegar a: mcp__playwright__browser_take_screenshot
 
 NO hacer:
@@ -315,8 +316,60 @@ Entonces: TRABAJADOR EXTERNO
 
 ---
 
-**Creado por**: Patricio + Claude (Hiperfoco Sábado Noche)
+## 💡 Aplicación Práctica
+
+### Ejemplo 1: Feature Nueva
+
+```yaml
+Tarea: "Agregar filtro de búsqueda"
+
+Blockchain Viviente:
+  ✅ search-filter-agent (3B)
+  ✅ Ejecuta lógica de filtrado
+  ✅ Permanente en sistema
+
+Trabajadores Externos:
+  ✅ Context7 → Docs de librería de búsqueda
+  ✅ Task(Explore) → Analiza componentes existentes
+  ✅ Playwright → Valida UI del filtro
+```
+
+### Ejemplo 2: Bug Fixing
+
+```yaml
+Tarea: "Arreglar error en autenticación"
+
+Blockchain Viviente:
+  ✅ auth-manager (2A)
+  ✅ Maneja lógica auth
+  ✅ Permanente en sistema
+
+Trabajadores Externos:
+  ✅ Firebase MCP → Estado real de usuarios
+  ✅ Playwright → Screenshot de error
+  ✅ Task(Explore) → Analiza código auth
+```
+
+### Ejemplo 3: Optimización
+
+```yaml
+Tarea: "Optimizar carga de datos"
+
+Blockchain Viviente:
+  ✅ data-loader-agent (3B)
+  ✅ Ejecuta estrategia de carga
+  ✅ Permanente en sistema
+
+Trabajadores Externos:
+  ✅ Database MCP → Métricas reales de queries
+  ✅ Context7 → Docs de optimización
+  ✅ Task(Explore) → Analiza patrones de carga
+```
+
+---
+
+**Creado por**: DAK System
 **Crítico para**: ambiente-perfecto-mapeo, delegación eficiente, contexto protegido
 **Estado**: ✅ Completo - Referencia permanente
 
-**Última actualización**: 26 de Octubre 2025
+**Última actualización**: Octubre 2025
