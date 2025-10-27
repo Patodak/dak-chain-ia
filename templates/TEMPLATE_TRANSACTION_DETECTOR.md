@@ -1,8 +1,8 @@
 # 🔄 TEMPLATE: Transaction Detector
 
-**Basado en**: PC1 (Manager Battle Pro) + PC2 (Soluciones Díaz CRM)
+**Basado en**: Casos reales de producción (apps multi-industria)
 **Para**: Cualquier proyecto que necesite clasificar tipos de transacciones
-**Versión**: 1.0
+**Versión**: 2.0
 
 ---
 
@@ -11,6 +11,31 @@
 **Transacción** = Cómo se comunican/conectan las partes de tu app
 
 NO es solo "transferencia de datos". Es el TIPO de flujo entre nodos.
+
+### 🧬 Arquitectura: META-AGENTES
+
+**CONCEPTO CLAVE**: Cada transacción tiene su propio Meta-Agente
+
+```yaml
+AGENTES = NODOS (1 a 1):
+  - 1 Agente por URL/Nodo
+  - Especialista de esa página específica
+
+META-AGENTES = TRANSACCIONES (1 a 1):
+  - 1 Meta-Agente por Transacción
+  - Coordina ENTRE nodos
+  - Transforma datos en tránsito
+  - Ejemplo: metagente-wifi-dashboard-proyector
+
+Relación:
+  Transacción CADENA (A → B → C):
+    - 3 agentes: [A], [B], [C]
+    - 2 meta-agentes: [A→B], [B→C]
+
+  Transacción WiFi (A ↔ B):
+    - 2 agentes: [A], [B]
+    - 1 meta-agente: [A↔B]
+```
 
 **Ejemplos**:
 - Usuario va de página A → página B (FLUJO)
@@ -497,8 +522,13 @@ Revisa y actualiza periódicamente
 ---
 
 **Creado por**: DAK System
-**Basado en**: PC1 + PC2 - Patrones validados en apps reales
+**Basado en**: Casos reales de producción - Patrones validados multi-industria
 **Para**: Cualquier app que necesite clasificar transacciones
-**Versión**: 1.0
+**Versión**: 2.0
 
-**Última actualización**: Octubre 2025
+**Última actualización**: Octubre 27, 2025
+
+**Changelog v2.0**:
+- ✅ Agregada sección META-AGENTES (1:1 mapping con transacciones)
+- ✅ Referencias genéricas (casos reales vs PC1/PC2 específicos)
+- ✅ Ejemplos mantienen industrias universales (E-commerce, SaaS, CRM)

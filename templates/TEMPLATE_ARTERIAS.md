@@ -1,6 +1,6 @@
 # 🩸 TEMPLATE: Adaptación de ARTERIAS por Dimensión
 
-**Basado en**: PC2 Adaptación Multi-Rol (Soluciones Díaz CRM)
+**Basado en**: Casos Reales Multi-Dimensión (apps producción)
 **Para**: Cualquier proyecto que necesite pre-cargar contexto estratégico
 
 ---
@@ -45,7 +45,7 @@ interface Arteria {
 
 ---
 
-## 🎯 De Genérica → Específica (PC2 Pattern)
+## 🎯 De Genérica → Específica (Patrón Validado)
 
 ### ANTES: ARTERIA Genérica (Sin Dimensión)
 
@@ -75,7 +75,7 @@ interface Arteria {
 
 ### DESPUÉS: ARTERIA Específica (Con Dimensión)
 
-**PC2 Transformación**:
+**Transformación Validada**:
 ```typescript
 {
   nombre: "admin-cotizaciones-mobile",  // ✅ Incluye dimensión en nombre
@@ -111,7 +111,7 @@ interface Arteria {
 
 ## 📚 Templates de ARTERIAS por Dimensión
 
-### Template 1: Multi-Rol (Como PC2)
+### Template 1: Multi-Rol (Ejemplo Multi-Rol)
 
 ```typescript
 // ARTERIA para cada rol
@@ -171,7 +171,7 @@ const ARTERIAS_POR_ROL: Record<RolType, Arteria[]> = {
 
   [RolType.ADMIN]: [
     {
-      nombre: "admin-cotizaciones-mobile",  // PC2 original
+      nombre: "admin-cotizaciones-mobile",  // caso real
       descripcion: "Gestión cotizaciones desde mobile",
       trigger_keywords: ["cotizaciones", "mobile", "gestionar"],
       speedup: 9.3,
@@ -419,7 +419,7 @@ function seleccionarArteria(
 }
 ```
 
-**Ejemplo PC2**:
+**Ejemplo Real**:
 ```typescript
 // Usuario ADMIN desde Mobile dice "gestionar cotizaciones"
 const clasificacion = {
@@ -437,7 +437,7 @@ const arteria = seleccionarArteria(clasificacion, keywords);
 
 ## 📊 Skill Filtering Pattern (Clave!)
 
-### Pattern de PC2: Filtrado por Dimensión
+### Patrón Validado: Filtrado por Dimensión
 
 ```typescript
 // ❌ ANTES: Cargar skill completa
@@ -473,7 +473,7 @@ const content = loadSkillContent('ADMIN');  // Solo 8k tokens
 
 ---
 
-## 💡 Tips de PC2
+## 💡 Tips Importantes
 
 ### Tip 1: Nombrar ARTERIAS con Dimensión
 
@@ -482,7 +482,7 @@ const content = loadSkillContent('ADMIN');  // Solo 8k tokens
 "admin-dashboard"
 
 // ✅ BIEN - Incluye dimensión en nombre
-"admin-cotizaciones-mobile"  // PC2 style
+"admin-cotizaciones-mobile"  // style recomendado
 "admin-analytics-desktop"
 "client-dashboard-standard"
 "super-admin-deploy-production"
@@ -509,7 +509,7 @@ pre_loaded_skills: [
 ### Tip 3: Medir Speedup Real
 
 ```typescript
-// ✅ PC2 midió speedup con métricas reales
+// ✅ Casos reales midieron speedup con métricas reales
 {
   speedup: 9.3,  // No es inventado
   estimated_savings: {
@@ -556,6 +556,6 @@ Después de adaptar ARTERIAS:
 ---
 
 **Creado por**: DAK CHAIN IA - Pattern Extraction System
-**Basado en**: PC2 Soluciones Díaz - ARTERIAS Multi-Dimensión
+**Basado en**: Casos Reales Multi-Dimensión - ARTERIAS Multi-Dimensión
 **Fecha**: Octubre 2025
 **Versión**: 1.0

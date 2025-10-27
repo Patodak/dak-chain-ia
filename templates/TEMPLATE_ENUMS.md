@@ -1,6 +1,6 @@
 # 🎨 TEMPLATE: Definición de Enums por Dimensión
 
-**Basado en**: PC2 Adaptación Multi-Rol (Soluciones Díaz CRM)
+**Basado en**: Casos Reales Multi-Dimensión (apps producción)
 **Para**: Cualquier proyecto que necesite clasificar por dimensiones
 
 ---
@@ -41,9 +41,9 @@ enum [DIMENSION]Type {
 
 ---
 
-## 🎯 Ejemplos de PC2
+## 🎯 Ejemplos Reales
 
-### PC2 Original (Soluciones Díaz CRM)
+### Caso Real (Multi-Dimensión)
 
 ```typescript
 // Dimensión 1: Roles
@@ -240,7 +240,7 @@ enum BillingCycle {
 ### Template 6: Devices + Plataformas
 
 ```typescript
-// Dispositivos (como PC2)
+// Dispositivos (ejemplo real)
 enum DispositivoType {
   DESKTOP = 'desktop',
   MOBILE = 'mobile',
@@ -307,7 +307,7 @@ enum LogLevel {
 
 ### Patrón: Dimensión Principal + Sub-Dimensiones
 
-**Ejemplo PC2**:
+**Ejemplo Real**:
 ```typescript
 // Dimensión principal
 enum RolType { ADMIN, CLIENT, GUEST }
@@ -403,7 +403,7 @@ Antes de finalizar tus enums, verifica:
 
 ---
 
-## 💡 Tips de PC2
+## 💡 Tips Importantes
 
 ### Tip 1: Mantén Enums Pequeños
 ```typescript
@@ -426,7 +426,7 @@ enum UserTier {  // Sub-dimensión para USER
 
 ### Tip 2: Strings Descriptivos
 ```typescript
-// ✅ PC2 usa strings descriptivos
+// ✅ Casos reales usan strings descriptivos
 enum RolType {
   GUEST = 'NO_AUTENTICADO',  // Más claro que 'guest'
   CLIENT = 'CLIENTE'         // Más claro que 'client'
@@ -469,6 +469,6 @@ Después de definir tus enums:
 ---
 
 **Creado por**: DAK CHAIN IA - Pattern Extraction System
-**Basado en**: PC2 Soluciones Díaz - Sistema de Enums Multi-Dimensión
+**Basado en**: Casos Reales Multi-Dimensión
 **Fecha**: Octubre 2025
 **Versión**: 1.0

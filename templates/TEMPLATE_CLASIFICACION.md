@@ -1,15 +1,15 @@
 # 🎯 TEMPLATE: Función de Clasificación Universal
 
-**Basado en**: PC2 Adaptación Multi-Rol (Soluciones Díaz CRM)
+**Basado en**: Casos Reales Multi-Dimensión (apps producción)
 **Para**: Cualquier proyecto con dimensiones (roles, tenants, idiomas, devices, etc.)
 
 ---
 
 ## 📋 Pattern Universal Extraído
 
-### De PC2 Específico → Template Genérico
+### De Caso Específico → Template Genérico
 
-**PC2 tenía**:
+**Caso real tenía**:
 ```typescript
 function clasificarPorRol(ruta: string): { rol: RolType, dispositivo?: DispositivoType }
 ```
@@ -36,7 +36,7 @@ if (condicionMuyEspecifica(entidad)) {
 }
 ```
 
-**Ejemplo PC2**:
+**Ejemplo Real**:
 ```typescript
 // Super Admin primero (más específico)
 if (ruta.startsWith('/dev-tools') || ruta.startsWith('/super-admin')) {
@@ -67,7 +67,7 @@ if (dimensionBase === VALOR_X) {
 }
 ```
 
-**Ejemplo PC2**:
+**Ejemplo Real**:
 ```typescript
 // Admin con detección de dispositivo
 if (ruta.startsWith('/admin')) {
@@ -109,7 +109,7 @@ if (PATTERNS_[DIMENSION].some(pattern => matchPattern(entidad, pattern))) {
 }
 ```
 
-**Ejemplo PC2**:
+**Ejemplo Real**:
 ```typescript
 const RUTAS_PUBLICAS_PATTERNS = [
   /^\/$/, /^\/nosotros/, /^\/servicios/, /^\/materiales/,
@@ -144,7 +144,7 @@ if (API_V2_PATTERNS.some(p => matchesPattern(request, p))) {
 return { dimension: VALOR_DEFAULT_SEGURO };
 ```
 
-**Ejemplo PC2**:
+**Ejemplo Real**:
 ```typescript
 return { rol: RolType.GUEST }; // Fallback seguro (menor privilegio)
 ```
@@ -161,7 +161,7 @@ return {
 
 ## 🎨 Templates por Tipo de Proyecto
 
-### Template A: Multi-Rol (Como PC2)
+### Template A: Multi-Rol (Ejemplo Multi-Rol)
 
 ```typescript
 enum RolType {
@@ -352,7 +352,7 @@ Antes de finalizar tu función de clasificación, verifica:
 
 ---
 
-## 💡 Tips de PC2
+## 💡 Tips Importantes
 
 ### Tip 1: Order Matters!
 ```typescript
@@ -406,6 +406,6 @@ Después de aplicar este template:
 ---
 
 **Creado por**: DAK CHAIN IA - Pattern Extraction System
-**Basado en**: PC2 Soluciones Díaz - Adaptación Multi-Rol
+**Basado en**: Casos Reales Multi-Dimensión
 **Fecha**: Octubre 2025
 **Versión**: 1.0
